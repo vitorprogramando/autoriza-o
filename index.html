@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+	<html lang="pt-br">
+			<head> 
+				<meta charset=utf-8>
+				<meta http-equiv="X-UA-compatible" content= "IE-edge">
+				<meta name= "viewport" content="widht=device-width, initial-scale=1.0">
+				<link rel="stylesheet" href="style.css">
+				<link rel="icon" href="img/neurox.jpg">
+				<title>Solicitação de Conserto</title>
+				<style>
+					*{
+						padding: 0;
+						margin: 0;
+					}
+
+					input{
+						height: 35px;
+						width: 500px;
+						border-radius: 30px;
+						
+						
+					}
+					h4{
+						right:0;
+						color: rgb(0, 0, 0);
+						
+					}
+					select{
+						height: 35px;
+						width: 500px;
+						border-radius: 30px;
+						
+					}
+					textarea{
+						border-radius: 5px;
+					}
+
+					.dados {
+						padding: 20px;
+						background-color: rgb(255, 255, 255);
+						width: 100%;
+						height: 100%;
+			
+					}
+
+					.dados p {
+						color: black;
+						
+					}
+			
+
+					.print {
+						display: none;
+						margin: 10px;
+						padding: 20px;
+						border: 1px solid black;
+						border-radius: 30px;
+						width: 900px;
+					}
+
+					.print h1 {
+						border-bottom: 1px solid black;
+						margin-bottom: 20px;
+					
+					}
+
+					.print h3 {
+    					border-bottom: 1px solid black;
+    					margin-bottom: 20px;
+
+					}
+
+
+					.print h5{
+						padding: 10px;
+						border: 1px solid black;
+						border-radius: 20px;
+						display: inline-block;
+						margin-left: 10px;
+					}
+
+					.print h4 {
+    					text-align: right;
+   						margin-bottom: 20px;
+					}
+					.print center {
+   						border: solid 2px black;
+    					border-radius: 12px;
+    					height: 16px;
+					}
+
+					.assinatura{
+						border-top: 1px solid black;
+						text-align: center;
+
+					}
+
+					@media print {
+						.print {
+							display: block;
+						}
+
+						.dados {
+							display: none;
+						}
+
+					}
+
+					.dados button {
+        				color: rgb(25, 135, 224);
+    					position: relative;
+        				margin: 15px;
+        				padding: 8px 15px;
+        				letter-spacing: 1px;
+        				text-decoration: none;
+        				color: rgb(25, 135, 224);
+        				font-weight: 700;
+        				background: transparent;
+        				cursor: pointer;
+        				transition: ease-out 0.8;
+        				border: 1px solid #216cb3;
+        				border-radius: 15px;
+        				box-shadow: inset 0 0 0 0 #000000;
+
+    				}
+
+    					button:hover {
+        					color: rgb(240, 240, 243);
+        					box-shadow: inset 0 -100px 0 0 rgb(33, 102, 230);
+
+    				}
+
+    					button:active {
+        					transform: scale(0.9);
+    				}
+
+    					ul li{
+        					margin: 0 9px;
+        
+   	 						}
+
+    					ul{
+       					display:flex;
+        				flex-wrap: wrap;
+        				list-style: none;
+    				}
+					
+				</style>
+				
+			</head>
+			<body>
+				
+				<div class="dados">
+					<center>
+					<img src="img/neurox.jpg" width="250px" height="230px ">
+					<h1>NEUROX</h1>
+					</center>
+					<br>
+					<br>
+					<h4>Empresa:</h4><br />
+					<select name="NS" id="option">
+						<option value="Documento de autorização" selected>Neurox</option>
+					</select>
+					<br>
+					<br>
+					<h4>Responsável:</h4><br />
+					<input type="text" id="nome" placeholder="Nome do Responsável" /> <br /><br />
+					<br>
+					<h4>Selecione o carro:</h4><br />
+					<select name="NS" id="NS">
+						<option value="João Pessoa-PB QFV-7A32-08" selected>João Pessoa-PB QFV-7A32-08</option>
+						<option value="João Pessoa-PB SKW-1C09-12" selected>João Pessoa-PB SKW-1C09-12</option>
+						<option value="João Pessoa-PB SKY-7D17-13" selected>João Pessoa-PB SKY-7D17-13</option>
+						<option value="" selected>Selecione o carro</option>
+					</select>
+					<br>
+					<br>
+					<h4>Tipo de Serviço:</h4><br />
+					<input type="text" id="referente" placeholder="Digite aqui" /> <br /><br />
+					<br>
+					<h4>Data:</h4><br />
+					<input type="date" id="data" /> <br /><br />
+					<h4>Observação:</h4><br />
+					<textarea name="textarea" id="text" rows="5" cols="30"></textarea> <br /><br />
+					<br>
+					<button onclick="gerarRecibo()">Gerar Solicitação</button>
+				</div>
+			
+				<div class="print">
+					<br>
+					<img src="img/neurox.jpg" height="200px" width="23%">
+						<h1>Neurox - <span id="recibo_option"></span></h1>
+						<br>
+						<h4>CNPJ: 29.112.611/0001-03</h4>
+						<br>
+					<center>SOLICITAÇÃO DE CONSERTO</center>
+					<br>
+					<br>
+					<h3>Responsável pela Solicitação:<p><span id="recibo_nome"></p></span></h3>
+					<br>
+					<br>
+					<h3>Carro selecionado:<p><span id="recibo_NS"></p></span></span></h3>
+					<br>
+					<br>
+					<h3>Serviço a ser feito:<p><span id="recibo_referente"></p></span></h3>
+					<br>
+					<br>
+					<h3>Data: <span id="recibo_data"></span></h3>
+					<br>
+					<span id="text">
+					 Observação:
+					<h6><p><br><textarea name="textarea" id="recibo_text" rows="5" cols="30"></textarea></h6>
+					</span>
+					<h4>AV Julia Freire, 1200, João Pessoa-PB</h4>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<div class="assinatura">Assinatura</div>
+					<br>
+					 <img src="img/rodapé.png" height="150px" width="100%">
+					<br>
+					<br>
+				</div>
+
+				<script>
+					
+					function gerarRecibo() {
+						document.getElementById('recibo_option').innerHTML = document.getElementById('option').value;
+						document.getElementById('recibo_nome').innerHTML = document.getElementById('nome').value;
+						document.getElementById('recibo_referente').innerHTML = document.getElementById('referente').value;
+						document.getElementById('recibo_NS').innerHTML = document.getElementById('NS').value;
+						document.getElementById('recibo_data').innerHTML = document.getElementById('data').value;
+						document.getElementById('recibo_text').innerHTML = document.getElementById('text').value;
+						window.print(); 
+					}
+				</script>
+				
+			</body>
+			</html>
